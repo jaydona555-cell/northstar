@@ -7,7 +7,7 @@ StreetHazards is a public-safety web app with two parts sharing one page:
 - A **community hazard map** where people can report road hazards, see reports clustered on a Leaflet map, sort them by distance, and vote when a hazard is no longer present.
 - A **HazardHunt game** — an interactive "can you spot the hazards?" challenge built on an illustrated city scene.
 
-Both live in the same `index.html` and are served from a single Firebase Hosting site at **https://streethazards.web.app/** (mirrored at https://streethazards.firebaseapp.com/).
+Both live in the same `index.html` and are served from a single Firebase Hosting site at **https://northstar-c7201.web.app/** (mirrored at https://northstar-c7201.firebaseapp.com/).
 
 ## Docs
 
@@ -29,7 +29,7 @@ The repo now contains two separate experiences that coexist on the same page:
 - Each marker popup links to **Google Maps** for the hazard location.
 - Includes a **Nominatim place search** bar (OpenStreetMap, no API key) to jump to restaurants/landmarks.
 - Has a **collapsible closest-hazards sidebar** and a mobile-friendly layout.
-- Has a **one-click demo seeder** (🧪 Seed demo data): every click adds ~50 demo hazards clustered near the venue/Sammamish and scattered across Washington, so a demo never starts on an empty map.
+- Has a **one-click demo seeder** (🧪 Seed demo data): every click adds ~1,000 demo hazards — dense near the venue/Sammamish, then scattered across Washington, US cities, and major world cities, so a demo never starts on an empty map.
 
 Backend: **Firebase** (Hosting + Firestore + Auth/Google). All logic runs in the browser via `js/game.js`; no custom server.
 
@@ -57,13 +57,13 @@ Backend: **Firebase** (Hosting + Firestore + Auth/Google). All logic runs in the
 
 ## Firebase project and config
 
-This app uses the Firebase project **streethazards-2a**.
+This app uses the Firebase project **northstar-c7201**.
 
 Relevant files:
 
-- `firebase.json` — Hosting config (site name `streethazards`, public root `.`) plus Firestore config pointing at `firestore.rules` and `firestore.indexes.json`.
-- `.firebaserc` — sets the default Firebase project to `streethazards-2a` for CLI commands.
-- `firestore.rules` — Firestore security rules. `match /hazards/{hazardId}`: `allow read: if true`, `allow create, update: if request.time < timestamp.date(2026, 10, 5)` (guests may report/vote until that date; **client deletes are not allowed**). `match /users/{userId}`: each signed-in user may read/write only their own doc. **Note:** rules only take effect once deployed (`firebase deploy --only firestore`) — the live DB currently still runs the original wide-open starter rules.
+- `firebase.json` — Hosting config (site name `northstar-c7201`, public root `.`) plus Firestore config pointing at `firestore.rules` and `firestore.indexes.json`.
+- `.firebaserc` — sets the default Firebase project to `northstar-c7201` for CLI commands.
+- `firestore.rules` — Firestore security rules. `match /hazards/{hazardId}`: `allow read: if true`, `allow create, update: if true` (guests may report/vote; **client deletes are not allowed**). `match /users/{userId}`: each signed-in user may read/write only their own doc. Rules take effect once deployed (`firebase deploy --only firestore`).
 - `firestore.indexes.json` — Firestore index config (currently empty; add indexes here if queries need them).
 - `js/game.js` — contains the Firebase app config (apiKey, authDomain, projectId, etc.) used to initialize Firebase, Auth, and Firestore in the browser.
 
@@ -78,7 +78,7 @@ If you want to run your own copy against a different Firebase project, you would
 
 The live site is deployed to **Firebase Hosting**.
 
-To deploy (requires the Firebase CLI and access to the `streethazards-2a` project):
+To deploy (requires the Firebase CLI and access to the `northstar-c7201` project):
 
 ```
 firebase login
@@ -92,7 +92,7 @@ What gets deployed:
 
 The default 404 page (`404.html`) is a standard Firebase-generated "Page Not Found" page and is served automatically for unknown URLs.
 
-**Important:** the current Firestore rules include a time-bound window that expires on **2026-10-05**. After that date, create/update operations would be denied until the rules are updated. Make sure to refresh the rules before then.
+
 
 ## Repo structure
 
@@ -115,7 +115,7 @@ StreetHazards/
 │   ├── complete.mp3           # sound when all hazards are found
 │   └── click.mp3              # UI interaction sound
 ├── firebase.json              # Firebase Hosting + Firestore config
-├── .firebaserc                # default Firebase project (streethazards-2a)
+├── .firebaserc                # default Firebase project (northstar-c7201)
 ├── firestore.rules            # Firestore security rules
 ├── firestore.indexes.json     # Firestore index config
 ├── seed.html                  # dev-only bulk seeder (superseded by the in-app seed button)

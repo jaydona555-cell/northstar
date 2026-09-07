@@ -35,7 +35,7 @@ Two experiences share one page:
                │  HTTPS (REST/WebSocket)
                ▼
 ┌──────────────────────── Firebase ──────────────────────────┐
-│  project: streethazards-2a                                   │
+│  project: northstar-c7201                                    │
 │  Hosting   — serves index.html, css/, js/, art/, sounds/     │
 │  Firestore — /hazards (all reports) · /users/{uid} (profiles)│
 │  Auth      — Google sign-in (popup → redirect fallback)      │
@@ -122,11 +122,11 @@ Vote threshold: a hazard is marked `resolved` when
 | 732 | `votesRequiredFor` | `3 + activeVotes` — the one threshold function |
 | 749–756 | `votedStorageKey`/`loadVotedHazards` | per-identity vote memory |
 | 762 | `addHazardMarker` | red circleMarker, size ∝ activeVotes, Google Maps popup |
-| 786 | `FIREBASE_CONFIG` | project `streethazards-2a` web config |
+| 786 | `FIREBASE_CONFIG` | project `northstar-c7201` web config |
 | 799–851 | `initFirebase`/`initAuth` | lazy Firebase SDK import + Google auth (popup/redirect) |
 | 929–968 | `ensureMap` | Leaflet map creation, WA default view, GPS locate/watch |
 | 1009 | `submitReport` | guest or signed-in report → `addDoc` (+ user-doc points tx if signed in) |
-| 1121 | `seedDemoData` | ~50 demo hazards per click, clustered + WA-wide scatter |
+| 1121 | `seedDemoData` | ~1,000 demo hazards per click: local clusters + WA scatter + US and world cities |
 | 1173 | `voteHazardGone` | Firestore **transaction**: increment, threshold check, resolve |
 | 1203 | `renderNearby` | top-12 closest hazards with vote buttons (haversine) |
 | 1274 | `watchHazards` | `onSnapshot` on `/hazards` → re-renders markers/list/leaderboard |
@@ -210,11 +210,11 @@ transaction.
   `sounds/`, `about.html`, `404.html`, etc.
 - **Rules/indexes:** `firebase deploy --only firestore`.
 - **Everything:** `firebase login` then `firebase deploy --only hosting,firestore`
-  (project default `streethazards-2a` per `.firebaserc`).
+  (project default `northstar-c7201` per `.firebaserc`).
 - **Local:** any static server from the repo root works (e.g. `python -m http.server`).
   No dependencies to install; Leaflet + Firebase load from CDN.
 - Because there is no build step, **the repo and the live site can diverge**:
-  code pushed to `main` only reaches `streethazards.web.app` when someone deploys.
+  code pushed to `main` only reaches `northstar-c7201.web.app` when someone deploys.
 
 ---
 
