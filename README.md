@@ -77,14 +77,18 @@ If you want to run your own copy against a different Firebase project, you would
 
 ## Deployment
 
-The live site is deployed to **Firebase Hosting**.
+The live site is deployed to **Firebase Hosting** at **https://northstar-c7201.web.app/**.
 
-To deploy (requires the Firebase CLI and access to the `northstar-c7201` project):
+To redeploy (requires access to the `northstar-c7201` project). The CLI runs via `npx` — no global install needed:
 
 ```
-firebase login
-firebase deploy --only hosting,firestore
+npx firebase-tools login            # one time, only if not logged in yet
+npx firebase-tools deploy --only hosting,firestore
 ```
+
+(If you have the CLI installed globally, `firebase login` and `firebase deploy --only hosting,firestore` work the same.)
+
+Deploying only hosting is enough for code/CSS/HTML changes; include `firestore` when you've changed `firestore.rules` or `firestore.indexes.json`. To preview locally first, serve the repo root (`python -m http.server`) and open `http://localhost:8000`.
 
 What gets deployed:
 
