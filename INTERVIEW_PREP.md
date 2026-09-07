@@ -1,4 +1,4 @@
-# StreetHazards — Interview Prep
+# Northstar — Interview Prep
 
 Study guide for talking about the project with judges, teammates, or in a
 technical interview. Covers the architecture, the features, and the kind of
@@ -11,8 +11,8 @@ and `ARCHITECTURE.md` (deep dive — diagrams, data flows, and a code map with l
 
 ## 1. The 30-second pitch
 
-> StreetHazards is a community public-safety platform. Two experiences in one
-> app: (1) a **HazardHunt game** where you spot safety hazards in an illustrated
+> Northstar is a community public-safety platform. Two experiences in one
+> app: (1) a **Hazard Hunt game** where you spot safety hazards in an illustrated
 > city scene before a 3-minute timer runs out, and (2) a **live community map**
 > where anyone can report real road hazards, vote "it's gone" on stale reports,
 > and earn points/leaderboard standing. The map updates in real time for every
@@ -24,7 +24,7 @@ and `ARCHITECTURE.md` (deep dive — diagrams, data flows, and a code map with l
 ## 2. Architecture (know this cold)
 
 ```
-StreetHazards/
+northstar/
 ├── index.html        # The entire SPA: start screen, game, map, report form, portfolio
 ├── css/game.css      # The one stylesheet for the whole app
 ├── js/game.js        # The one script: game engine + map module + auth + Firestore
@@ -46,7 +46,7 @@ StreetHazards/
 | No frameworks — vanilla JS | Zero build step, deploys straight to Firebase Hosting, easy for a small team to reason about. Leaflet is the only real library (map tiles). |
 | Single `game.js` with modules | One source of truth for score/timer/hazards; the map module is an IIFE so its state (`hazards`, `userLocation`, votes) stays private and doesn't collide with game state. |
 | Firestore real-time listener | `onSnapshot` on the `hazards` collection means every open map updates instantly when anyone reports or votes — no polling, no refresh. |
-| Map-first home | The community map is the landing view (`#map`); the game is a CTA ("Play HazardHunt") reachable from the toolbar. Views switch via hash routing (`#map`, `#start`, `#game`, `#results`) with `history.pushState`, so browser Back/Forward works. |
+| Map-first home | The community map is the landing view (`#map`); the game is a CTA ("Play Hazard Hunt") reachable from the toolbar. Views switch via hash routing (`#map`, `#start`, `#game`, `#results`) with `history.pushState`, so browser Back/Forward works. |
 | Firestore rules over Firebase Auth-only | Guests can report (needed for hackathon demo), but each user's `/users/{uid}` portfolio doc is private to them. Points merge from guest localStorage into the account on sign-in. |
 
 ---
@@ -82,7 +82,7 @@ StreetHazards/
 - Guest: points in localStorage; on sign-in they **merge into the account** and localStorage clears.
 - Leaderboard aggregates reports per identity.
 
-### The game (HazardHunt)
+### The game (Hazard Hunt)
 - **19 hazards** positioned by **percentage coordinates** on `art/unsafe-city.png`, so markers stay glued to the art at any screen size.
 - 3-minute countdown; found hazards can't be scored twice; wrong clicks only note "No hazard detected."
 - Sound effects guarded by try/catch so blocked autoplay never crashes.

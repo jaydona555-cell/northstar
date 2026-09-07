@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HazardHunt — Can You Spot the Hazards?</title>
+  <title>Northstar — Can You Spot the Hazards?</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="css/game.css" />
   <link
@@ -20,7 +20,7 @@
     <a class="brand" href="#map" title="Back to the community map">
       <div class="brand-icon" aria-hidden="true">🚨</div>
       <div class="brand-text">
-        <h1>HAZARDHUNT</h1>
+        <h1>NORTHSTAR</h1>
         <span>Public Safety Awareness</span>
       </div>
     </a>
@@ -36,7 +36,7 @@
   <!-- ============ START SCREEN (game intro — opened from the map CTA) ============ -->
   <section class="view" id="start-view">
     <div class="eyebrow">Mission 01 · Urban Awareness</div>
-    <h2 class="start-title">HAZARDHUNT</h2>
+    <h2 class="start-title">NORTHSTAR</h2>
     <p class="start-subtitle">Can you spot what others miss?</p>
     <p class="start-copy">
       Explore the city scene, identify hidden safety hazards, and learn why
@@ -183,22 +183,6 @@
   <!-- ============ MAP VIEW (community reports) — HOME ============ -->
   <section class="view active" id="map-view">
     <div class="map-layout">
-      <!-- Left sidebar: closest hazards + voting (Stanley's original layout) -->
-      <aside class="hazards-sidebar" id="hazards-sidebar" aria-labelledby="nearby-title">
-        <div class="hazards-sidebar-header">
-          <div>
-            <div class="panel-kicker"><span aria-hidden="true">⌖</span> Nearest to you</div>
-            <h2 id="nearby-title">Nearby hazards</h2>
-            <span class="nearby-count" id="nearby-count">0 hazards</span>
-          </div>
-          <button class="hazards-sidebar-toggle" id="hazards-sidebar-toggle" type="button" aria-label="Minimize hazards sidebar" aria-expanded="true">&lsaquo;</button>
-        </div>
-        <p class="nearby-status" id="nearby-status">Enable location to sort by distance.</p>
-        <div class="hazard-list" id="hazard-list" aria-live="polite">
-          <div class="leaderboard-empty">No hazards reported nearby yet.</div>
-        </div>
-      </aside>
-
       <div class="map-column">
     <div class="map-card">
       <div class="map-toolbar">
@@ -210,7 +194,7 @@
           <button class="map-tool" id="locate-me" type="button" title="Center on my location" aria-label="Center on my location">◎</button>
           <button class="map-tool" id="map-fs-btn" type="button" title="Fullscreen map" aria-label="Toggle map fullscreen">⛶</button>
           <button class="map-tool" id="map-auth-btn" type="button" title="Sign in to report hazards" aria-label="Sign in">Sign in</button>
-          <button class="btn" id="map-play-btn" type="button"><span class="button-icon" aria-hidden="true">▶</span> Play HazardHunt</button>
+          <button class="btn" id="map-play-btn" type="button"><span class="button-icon" aria-hidden="true">▶</span> Play Hazard Hunt</button>
           <button class="report-toggle" id="report-toggle" type="button">
             <span aria-hidden="true">+</span> Report a hazard
           </button>
@@ -231,6 +215,21 @@
         <span class="live-indicator"><span class="status-dot"></span> Live feed</span>
       </div>
       <div class="map-stage">
+        <!-- Inside-window sidebar: closest hazards + voting (overlays the map) -->
+        <aside class="hazards-sidebar" id="hazards-sidebar" aria-labelledby="nearby-title">
+          <div class="hazards-sidebar-header">
+            <div>
+              <div class="panel-kicker"><span aria-hidden="true">⌖</span> Nearest to you</div>
+              <h2 id="nearby-title">Nearby hazards</h2>
+              <span class="nearby-count" id="nearby-count">0 hazards</span>
+            </div>
+            <button class="hazards-sidebar-toggle" id="hazards-sidebar-toggle" type="button" aria-label="Minimize hazards sidebar" aria-expanded="true">&lsaquo;</button>
+          </div>
+          <p class="nearby-status" id="nearby-status">Enable location to sort by distance.</p>
+          <div class="hazard-list" id="hazard-list" aria-live="polite">
+            <div class="leaderboard-empty">No hazards reported nearby yet.</div>
+          </div>
+        </aside>
         <form class="place-search" id="place-search" role="search">
           <label class="sr-only" for="place-search-input">Search for a restaurant or landmark</label>
           <input id="place-search-input" type="search" placeholder="Search restaurants and landmarks" autocomplete="off" />
@@ -296,6 +295,7 @@
         </div>
       </section>
       </div>
+    </div>
     </div>
 
     <!-- ============ REPORT PANEL (report-a-hazard form) ============ -->

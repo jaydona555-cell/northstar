@@ -1,5 +1,5 @@
 /* =====================================================
-   HAZARDHUNT — game.js
+   NORTHSTAR — game.js
    Single source of truth for: score, timer, discovered
    hazards, accuracy, and game-over state.
    ===================================================== */
@@ -930,7 +930,12 @@ const mapModule = (() => {
     if (map || typeof L === 'undefined') return;
     // Default to Washington state (where reports live) instead of the whole
     // globe; the locate flow below re-centers on the user once GPS is granted.
-    map = L.map('map').setView([47.45, -121.9], 8);
+    map = L.map('map', {
+      // Zoom control lives bottom-right so the inside-window hazards sidebar
+      // (overlays the map's left edge) never covers it.
+      zoomControl: false
+    }).setView([47.45, -121.9], 8);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -1491,7 +1496,7 @@ function wireEvents() {
     mapModule.activate();
   });
 
-  // Map-first home: "Play HazardHunt" CTA opens the game intro.
+  // Map-first home: "Play Hazard Hunt" CTA opens the game intro.
   // If a hunt is already underway, offer to resume it instead of resetting.
   el.buttons.mapPlay.addEventListener('click', () => {
     playSound('click');

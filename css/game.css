@@ -1,5 +1,5 @@
 /* =====================================================
-   HAZARDHUNT — Public Safety Awareness Game
+   NORTHSTAR — Public Safety Awareness
    Single cohesive stylesheet: landing → hunt → results,
    plus the community report-a-hazard map view.
    ===================================================== */
@@ -1255,29 +1255,25 @@ body {
 
 .map-column {
   min-width: 0;
-  margin-left: 314px; /* 300px sidebar + 14px gap */
-  transition: margin-left 160ms ease;
 }
 
-.map-layout:has(.hazards-sidebar.is-minimized) .map-column {
-  margin-left: 70px; /* 56px minimized sidebar + 14px gap */
-}
-
-/* Light-theme sidebar — restored from Stanley's original map design.
-   Fixed to the left edge so it floats over the map instead of pushing
-   it down; the map column offsets itself with a left margin. */
+/* Light-theme sidebar — sits INSIDE the map window, absolutely positioned
+   over the map stage so it floats on the map's left edge like a panel.
+   The map fills the whole window behind it (no page-level margin). */
 
 .hazards-sidebar {
-  position: fixed;
-  top: 70px; /* below the app header */
+  position: absolute;
+  top: 0;
   bottom: 0;
   left: 0;
-  z-index: 900;
+  z-index: 900; /* below the place search (z-index 1000) */
   width: 300px;
   box-sizing: border-box;
   overflow-y: auto;
   padding: 24px 18px;
   border: 0;
+  border-radius: 0 14px 14px 0;
+  box-shadow: 4px 0 18px rgba(15, 23, 42, 0.16);
   border-right: 1px solid #cbd5e1;
   background: #f8fafc;
   color: #172033;
@@ -1459,14 +1455,6 @@ body {
 
 #map-view:fullscreen .map-layout {
   display: block;
-}
-
-#map-view:fullscreen .hazards-sidebar {
-  display: none;
-}
-
-#map-view:fullscreen .map-column {
-  margin-left: 0;
 }
 
 #map-view:fullscreen .map-card {
@@ -1763,6 +1751,11 @@ body {
 
   .hazards-sidebar.is-minimized h2 {
     display: block;
+  }
+
+  /* Keep the map zoom controls above the hazards bottom sheet. */
+  .leaflet-bottom.leaflet-right {
+    bottom: 44vh;
   }
 }
 

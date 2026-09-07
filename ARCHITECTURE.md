@@ -1,4 +1,4 @@
-# StreetHazards — Architecture
+# Northstar — Architecture
 
 A deep-dive companion to `README.md` (what it is, how to run/deploy) and
 `INTERVIEW_PREP.md` (how to talk about it). This file answers *how the pieces
@@ -9,7 +9,7 @@ end-to-end flows, and the security model.
 
 ## 1. Big picture
 
-StreetHazards is a **serverless single-page app**. There is no backend code,
+Northstar is a **serverless single-page app**. There is no backend code,
 no database server, and no build step — everything is static files on Firebase
 Hosting, and all logic runs in the browser. The "backend" is Firebase services
 (Firestore + Auth) called directly from the page over HTTPS.
@@ -19,7 +19,7 @@ Two experiences share one page:
 1. **Community hazard map** — collaborative, live: anyone reports hazards,
    votes "it's gone", and the map/leaderboard update in real time for every
    open client from Firestore.
-2. **HazardHunt game** — solo, timed, fully client-side: spot hazards in an
+2. **Hazard Hunt game** — solo, timed, fully client-side: spot hazards in an
    illustrated city scene. Its state never leaves the browser.
 
 ```

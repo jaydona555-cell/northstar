@@ -1,11 +1,11 @@
-# StreetHazards
+# Northstar
 
 **Repository:** https://github.com/jaydona555-cell/northstar
 
-StreetHazards is a public-safety web app with two parts sharing one page:
+Northstar is a public-safety web app with two parts sharing one page:
 
 - A **community hazard map** where people can report road hazards, see reports clustered on a Leaflet map, sort them by distance, and vote when a hazard is no longer present.
-- A **HazardHunt game** — an interactive "can you spot the hazards?" challenge built on an illustrated city scene.
+- A **Hazard Hunt game** — an interactive "can you spot the hazards?" challenge built on an illustrated city scene.
 
 Both live in the same `index.html` and are served from a single Firebase Hosting site at **https://northstar-c7201.web.app/** (mirrored at https://northstar-c7201.firebaseapp.com/).
 
@@ -13,6 +13,7 @@ Both live in the same `index.html` and are served from a single Firebase Hosting
 
 - `ARCHITECTURE.md` — deep dive: runtime topology, Firestore data model, a line-numbered code map of `js/game.js`, end-to-end flows, and the security model.
 - `INTERVIEW_PREP.md` — judge Q&A plus DevTools live-coding drills (line-by-line change exercises).
+- `FUTURE_WORK.md` — backlog of ideas: streaks, shop, chatbot, CI/CD, and more (with what's already done).
 
 ## Feature split
 
@@ -33,7 +34,7 @@ The repo now contains two separate experiences that coexist on the same page:
 
 Backend: **Firebase** (Hosting + Firestore + Auth/Google). All logic runs in the browser via `js/game.js`; no custom server.
 
-### HazardHunt game
+### Hazard Hunt game
 
 - Illustrated city scene (`art/unsafe-city.png`) with 19 clickable hazard markers positioned by percentage so they stay glued to the artwork at any size.
 - 3-minute countdown timer, live score/found/total/accuracy HUD, progress bar, and a results screen with Play Again.
@@ -51,7 +52,7 @@ Backend: **Firebase** (Hosting + Firestore + Auth/Google). All logic runs in the
 
    Then open `http://localhost:8000`.
 
-2. The **HazardHunt game** works fully offline from that static server — open the page and click Start Hunt.
+2. The **Hazard Hunt game** works fully offline from that static server — open the page and click Start Hunt.
 
 3. The **community map** loads Leaflet and the Firebase SDKs from CDN, so no install is required. **Guests can report and vote immediately** (the app assigns a device ID); sign in with Google to keep points and reports across devices. The Firebase project must be reachable. Geolocation, place search (Nominatim), and audio also behave best when the page is served over HTTPS or on localhost.
 
@@ -97,16 +98,16 @@ The default 404 page (`404.html`) is a standard Firebase-generated "Page Not Fou
 ## Repo structure
 
 ```
-StreetHazards/
+northstar/
 ├── index.html                 # main page: start screen, game, results, community map, report form
 ├── about.html                 # simple project overview page
 ├── 404.html                   # custom Firebase Hosting 404 page
 ├── README.md                  # this file
 ├── favicon.svg                # site icon
 ├── css/
-│   └── game.css               # styles for the whole HazardHunt experience + shared UI
+│   └── game.css               # styles for the whole Northstar experience + shared UI
 ├── js/
-│   └── game.js                # HazardHunt game state + logic (score, timer, hazards, sounds, map integration)
+│   └── game.js                # Hazard Hunt game state + logic (score, timer, hazards, sounds, map integration)
 ├── art/
 │   └── unsafe-city.png        # illustrated game artwork
 ├── sounds/
