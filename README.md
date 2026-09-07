@@ -1,6 +1,6 @@
 # StreetHazards
 
-**Repository:** https://github.com/Stanlee1234/StreetHazards
+**Repository:** https://github.com/jaydona555-cell/northstar
 
 StreetHazards is a public-safety web app with two parts sharing one page:
 
